@@ -29,7 +29,7 @@ Fabric is a responsive, mobile-first, front-end framework, designed to make it q
 
 **RactiveJS**
 
-The complete frontend is controlled by <a href="http://www.ractivejs.org" target="_blank">RactiveJS</a>. Additionally, <a href="https://github.com/OfficeDev/Office-UI-Fabric/tree/master/src/components" target="_blank">Office UI Fabric components</a> used in this demo
+The complete frontend is controlled by <a href="http://www.ractivejs.org" target="_blank">RactiveJS</a>. Additionally, <a href="https://github.com/OfficeDev/Office-UI-Fabric/blob/master/ghdocs/COMPONENTS.md" target="_blank">Office UI Fabric components</a> used in this demo
 have been repackaged into <a href="http://docs.ractivejs.org/latest/components" target="_blank">RactiveJS components</a>.
 They're located under *scripts/portal/components*
 
