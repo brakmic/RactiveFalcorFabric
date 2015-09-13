@@ -1,0 +1,35 @@
+ <div class="PlayerPage-theater">
+  <div class="PlayerPage-theaterBackground ms-bgColor-neutralDark"></div>
+  <div class="PlayerPage-theaterPlayer u-contentCenter">
+    <div class="VideoPlayer">
+      <div class="VideoPlayer-player">
+        <!-- Actual video player element goes here.
+             Can be a <video> element or embedded iFrame player. -->
+        <div class="VideoPlayer-iframe">
+          <img class="VideoList-thumbImg" src="http://lorempixel.com/960/540/business/4" alt="Video Title">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var $           = window.$;
+var log         = require('bows')('Player Component');
+var domReady    = require('domready');
+var app         = require('ampersand-app');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {}
+  },
+  adapt: ['Ampersand'],
+  onrender: function(){
+    log('rendered');
+  },
+  onteardown: function(){
+    log('teared down');
+  }
+}
+</script>

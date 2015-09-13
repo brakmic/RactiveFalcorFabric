@@ -1,0 +1,118 @@
+<div class="VideoPortal-page ChannelsPage">
+  <div class="ms-Grid">
+    {{#channelList}}
+      {{>channel}}
+    {{/}}
+  </div>
+
+{{#partial channel}}
+  <a href={{hrefUrl}} class="ChannelGroup-channel ms-fontColor-neutralSecondary ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4"
+    style={{style}}>{{name}}</a>
+{{/channel}}
+</div>
+
+<script>
+var $        = window.$;
+var log      = require('bows')('Channels Component');
+var domReady = require('domready');
+var models   = require('channel-model');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {
+      channelList: null
+    }
+  },
+  adapt: ['Ampersand'],
+  onrender: function(){
+    this.initCollections();
+  },
+  onteardown: function(){
+    log('teared down');
+  },
+  initCollections: function(){
+    var channels = new models.ChannelCollection();
+    channels.add([
+        {
+          id      : '0',
+          name    : 'Technical Presentations',
+          style   : 'border-color: #dc0606;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '1',
+          name    : 'Employee Interviews',
+          style   : 'border-color: #dc0606;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '2',
+          name    : 'Executive Briefings',
+          style   : 'border-color: #bf9000;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '3',
+          name    : 'Research Insights',
+          style   : 'border-color: #548235;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '4',
+          name    : 'Acquisitions and Mergers Overview',
+          style   : 'border-color: #2e75b6;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '5',
+          name    : 'Web Tech Talks',
+          style   : 'border-color: #bf9000;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '6',
+          name    : 'Brown Bag Series',
+          style   : 'border-color: #dc0606;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '7',
+          name    : 'Sales Reports',
+          style   : 'border-color: #548235;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '8',
+          name    : 'Holding Projections',
+          style   : 'border-color: #2e75b6;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '9',
+          name    : 'Technical Presentations',
+          style   : 'border-color: #dc0606;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        },
+        {
+          id      : '10',
+          name    : 'Customer Trends',
+          style   : 'border-color: #dc0606;',
+          hrefUrl : '/home',
+          hrefTag : 'channel-clicked'
+        }
+      ]);
+    this.set('channelList', channels);
+  }
+}
+</script>

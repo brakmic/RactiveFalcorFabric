@@ -1,0 +1,84 @@
+<div class="VideoPortal">
+   <div class="VideoPortal-content">
+    <app-navbar/>
+    <spotlight-container/>
+    <div class="main-view"/>
+   </div>
+</div>
+
+<script>
+var $         = window.$;
+var domReady  = require('domready');
+var log       = require('bows')('Portal Component');
+var navbar    = require('navbar-component');
+var spotlight = require('spotlight-component');
+var app       = require('ampersand-app');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {
+    }
+  },
+  components: {
+    'app-navbar': navbar,
+    'spotlight-container': spotlight
+  },
+  onrender: function(){
+    log('rendered');
+  },
+  oncomplete: function(){
+    this.setupEventHandlers();
+  },
+  setupEventHandlers: function(){
+    var navbar = this.findComponent('app-navbar');
+    var spotlight = this.findComponent('spotlight-container');
+    //navigation
+    navbar.on('home-link', function(e){
+      e.original.preventDefault();
+      app.navigate('/home');
+      log('navigating to home');
+    });
+    navbar.on('channels-link', function(e){
+      e.original.preventDefault();
+      app.navigate('/channels');
+      log('navigating to channels');
+    });
+    navbar.on('employee-interviews', function(e){
+      e.original.preventDefault();
+      app.navigate('/employee-interviews');
+      log('navigating to employee-interviews');
+    });
+    navbar.on('executive-briefings', function(e){
+      e.original.preventDefault();
+      app.navigate('/executive-briefings');
+      log('navigating to executive-briefings');
+    });
+    navbar.on('web-tech-talks', function(e){
+      e.original.preventDefault();
+      app.navigate('/web-tech-talks');
+      log('navigating to web-tech-talks');
+    });
+    navbar.on('upload-link', function(e){
+      e.original.preventDefault();
+      log('upload clicked');
+    });
+    //spotlight
+    spotlight.on('dynamic-b2c-clicked', function(e){
+      e.original.preventDefault();
+      log('b2c clicked');
+    });
+    spotlight.on('clicks-mortar-solutions-clicked', function(e){
+      e.original.preventDefault();
+      log('clicks-mortar-solutions clicked');
+    });
+    spotlight.on('quick-visualisation-clicked', function(e){
+      e.original.preventDefault();
+      log('quick-visualisation clicked');
+    });
+  },
+  onteardown: function(){
+    log('teared down');
+  }
+};
+</script>

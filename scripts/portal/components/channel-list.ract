@@ -1,0 +1,143 @@
+<!-- List of channel groups -->
+<div class="ChannelList">
+<!-- List of Popular videos -->
+  <div class="ChannelList-item">
+    <h3 class="ChannelList-title" style="border-color: #dc0606">
+      <a href="#">
+        <span class="ChannelList-titleText ms-font-xl">Popular</span><span class="ms-font-l ms-fontColor-themePrimary ms-fontColor-themeDark-hover">See all videos</span>
+      </a>
+    </h3>
+
+    <!-- Use the responsive grid to both arrange individual video items,
+         as well as the text and images within individual items.
+     -->
+    <div class="ChannelList-videos ms-Grid">
+      <div class="ms-Grid-row">
+        {{#popularVideos}}
+          {{>videoItemPopular}}
+        {{/}}
+      </div>
+    </div>
+  </div>
+
+  <!-- List of Community videos -->
+  <div class="ChannelList-item">
+    <h3 class="ChannelList-title" style="border-color: #3399ff;">
+      <a href="#">
+        <span class="ChannelList-titleText ms-font-xl">Community</span><span class="ms-font-l ms-fontColor-themePrimary ms-fontColor-themeDark-hover">See all videos</span>
+      </a>
+    </h3>
+
+    <div class="ChannelList-videos ms-Grid">
+      <div class="ms-Grid-row">
+      {{#communityVideos}}
+        {{>videoItemCommunity}}
+      {{/}}
+      </div>
+    </div>
+  </div>
+
+<!-- Partials -->
+{{#partial videoItemPopular}}
+<div class="VideoList-item ms-Grid-col ms-Grid ms-u-sm12 ms-u-md6 ms-u-lg4 ms-u-xl3">
+  <div class="ms-Grid-row">
+    <div class="VideoList-thumb ms-Grid-col ms-u-sm12 ms-u-lg12">
+      <a href={{hrefUrl}} class="VideoList-thumbLink" on-click={{hrefTag}}>
+        <img class="VideoList-thumbImg" src={{imgUrl}} alt={{videoTitle}}>
+        <span class="VideoList-thumbCaption">{{videoLength}}</span>
+      </a>
+    </div>
+    <div class="VideoList-text ms-Grid-col ms-u-sm12 ms-u-lg12">
+      <a href={{hrefUrl}}><span class="VideoList-title ms-font-m-plus" on-click={{hrefTag}} title={{videoTitle}}>{{videoTitle}}</span></a>
+      <span class="VideoList-viewCount ms-font-s-plus ms-fontColor-neutralSecondaryAlt">{{viewCount}} views</span>
+    </div>
+  </div>
+</div>
+{{/videoItemPopular}}
+
+{{#partial videoItemCommunity}}
+<div class="VideoList-item ms-Grid-col ms-Grid ms-u-sm12 ms-u-md6 ms-u-lg4 ms-u-xl3">
+  <div class="ms-Grid-row">
+    <div class="VideoList-thumb ms-Grid-col ms-u-sm12 ms-u-lg12">
+      <a href={{hrefUrl}} class="VideoList-thumbLink" on-click={{hrefTag}}>
+        <img class="VideoList-thumbImg" src={{imgUrl}} alt={{videoTitle}}>
+        <span class="VideoList-thumbCaption">{{videoLength}}</span>
+      </a>
+    </div>
+    <div class="VideoList-text ms-Grid-col ms-u-sm12 ms-u-lg12">
+      <a href={{hrefUrl}}><span class="VideoList-title ms-font-m-plus" on-click={{hrefTag}} title={{videoTitle}}>{{videoTitle}}</span></a>
+      <span class="VideoList-viewCount ms-font-s-plus ms-fontColor-neutralSecondaryAlt">{{viewCount}} views</span>
+    </div>
+  </div>
+</div>
+{{/videoItemCommunity}}
+
+</div>
+
+<script>
+'use strict';
+var $        = window.$;
+var app      = require('ampersand-app');
+var _        = require('underscore');
+var log      = require('bows')('Channel List Component');
+var domReady = require('domready');
+var models   = require('video-item-model');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {
+      popularVideos   : new models.VideoItemCollection(),
+      communityVideos : new models.VideoItemCollection()
+    }
+  },
+  adapt: ['Ampersand'],
+  onrender: function(){
+    log('rendered');
+    this._model = new falcor.Model({source: new falcor.HttpDataSource('/model.json')});
+    this._model.getValue('todos[0].name').then(function(result){
+      var val = result;
+      log("TODO: " + val);
+    });
+    /*this._model.get("movies").then(function(results){
+      log("MOVIES: " + results.length);
+    });*/
+
+  },
+  oncomplete: function(){
+    var self = this;
+    domReady(function(){
+      self.initCollections();
+    });
+  },
+  onteardown: function(){
+    log('teared down');
+  },
+  initCollections: function(){
+    var self = this;
+    var popular = new models.VideoItemCollection();
+    var community = new models.VideoItemCollection();
+    var movieService = app.services.movies.instance;
+    var pop = [];
+    var com = [];
+    var movies = {};
+    movieService.getAllMovies()
+      .then(function(result){
+        var rows = result.rows;
+        _.each(rows, function(movie, key, list){
+          if(!movie)return;
+          var m = movie.doc;
+          if(m.views)
+            return;
+          else
+            self.push('popularVideos', m);
+        });
+      }).catch(function(err){
+        log("ERROR " + err);
+      });
+
+/*    this.set('popularVideos', popular);
+    this.set('communityVideos', community);*/
+  }
+}
+</script>

@@ -1,0 +1,88 @@
+<div class="SpotLight-container">
+      <div class="u-contentCenter">
+        <!-- Use the responsive grid to arrange spotlight video items,
+             as well as the text and images within each item.
+         -->
+        <div class="SpotLightList ms-Grid">
+          <div class="ms-Grid-row">
+            {{#spotlightItems}}
+             {{>spotlightItem}}
+            {{/}}
+          </div>
+        </div>
+      </div>
+</div>
+{{#partial spotlightItem}}
+<div class="SpotLight-item ms-u-md6 ms-u-lg4">
+  <div class="SpotLight-thumb">
+    <a href={{hrefUrl}} class="SpotLight-thumbLink" on-click={{hrefTag}}>
+      <img class="SpotLight-thumbImg" src={{imgUrl}} title={{imgTitle}} alt={{imgAlt}}>
+    </a>
+  </div>
+  <div class="SpotLight-text ms-font-s-plus">
+    <a href={{hrefUrl}} on-click={{hrefTag}}>
+      <span class="SpotLight-videoTitle">{{videoTitle}}</span>
+      <span class="SpotLight-videoLength">{{videoLength}}</span>
+    </a>
+  </div>
+</div>
+{{/spotlightItem}}
+<script>
+var $        = window.$;
+var log      = require('bows')('Spotlight Component');
+var domReady = require('domready');
+var model    = require('spotlight-item-model');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {
+      'spotlightItems': null
+    }
+  },
+  adapt: ['Ampersand'],
+  onrender: function(){
+    this.initCollections();
+    log('rendered');
+  },
+  onteardown: function(){
+    log('teared down');
+  },
+  initCollections: function(){
+    var items = new model.SpotlightItemCollection();
+    items.add([
+        {
+          id          : '0',
+          videoTitle  : 'Dynamically procrastinate B2C users after installed base benefits',
+          videoLength : '10:23',
+          hrefUrl     : '#',
+          hrefTag     : 'dynamic-b2c-clicked',
+          imgUrl      : 'http://lorempixel.com/960/540/technics/1/',
+          imgTitle    : 'advarics GmbH Services',
+          imgAlt      : ''
+        },
+        {
+          id          : '1',
+          videoTitle  : 'Dramatically maintain clicks-and-mortar solutions',
+          videoLength : '23:89',
+          hrefUrl     : '#',
+          hrefTag     : 'clicks-mortar-solutions-clicked',
+          imgUrl      : 'http://lorempixel.com/960/540/technics/2/',
+          imgTitle    : 'Sharepoint Games',
+          imgAlt      : ''
+        },
+        {
+          id          : '2',
+          videoTitle  : 'Seamlessly visualize quality intellectual capital',
+          videoLength : '45:23',
+          hrefUrl     : '#',
+          hrefTag     : 'quick-visualisation-clicked',
+          imgUrl      : 'http://lorempixel.com/960/540/technics/3/',
+          imgTitle    : 'Azure Linux Services Overview',
+          imgAlt      : ''
+        }
+    ]);
+    this.set('spotlightItems', items);
+  }
+}
+</script>

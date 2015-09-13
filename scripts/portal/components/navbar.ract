@@ -1,0 +1,96 @@
+<div class="VideoPortal-navBar">
+  <!-- Fabric NavBar component -->
+  <div class="ms-NavBar">
+    <div class="ms-NavBar-openMenu js-openMenu">
+      <i class="ms-Icon ms-Icon--menu"></i>
+    </div>
+          <ul class="ms-NavBar-items">
+            <li class="ms-NavBar-item ms-NavBar-item--search ms-u-hiddenSm">
+            <div class="ms-TextField">
+              <input class="ms-TextField-field">
+            </div>
+          </li>
+            <li class="ms-NavBar-item is-selected"><a class="ms-NavBar-link" href={{homeUrl}} on-click="home-link">{{homeTitle}}</a></li>
+            <li class="ms-NavBar-item"><a class="ms-NavBar-link" href={{allChannelsUrl}} on-click="channels-link">{{allChannelsTitle}}</a></li>
+          <li class="ms-NavBar-item ms-NavBar-item--hasMenu">
+                <a class="ms-NavBar-link" href="#">{{channelMenuTitle}}</a>
+                <i class="ms-NavBar-chevronDown ms-Icon ms-Icon--chevronDown"></i>
+                <ul class="ms-ContextualMenu">
+                {{#navbaritems}}
+                  {{>navbaritem}}
+                {{/}}
+           </ul>
+          </li>
+
+        <li class="ms-NavBar-item ms-NavBar-item--right" on-click="upload-link"><i class="ms-Icon ms-Icon--upload"></i> {{uploadTitle}}</li>
+      </ul>
+  </div>
+</div>
+
+{{#partial navbaritem}}
+ <li class={{linkClass}}><a class={{hrefClass}} href={{hrefUrl}} on-click={{hrefTag}}>{{hrefText}}</a></li>
+{{/navbaritems}}
+
+<script>
+
+var $ = window.$;
+var domReady = require('domready');
+var log = require('bows')('NavBar Component');
+var model = require('navbar-item-model');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {
+      'homeTitle': 'Home',
+      'homeUrl': 'home',
+      'allChannelsUrl': 'channels',
+      'allChannelsTitle': 'All Channels',
+      'channelMenuTitle': 'My Channels',
+      'navbaritems': new model.NavBarItemCollection(),
+      'uploadTitle': 'Upload'
+    }
+  },
+  adapt: ['Ampersand'],
+  onrender: function(){
+    var items = new model.NavBarItemCollection();
+    items.add([
+        {
+            id        : '0',
+            linkClass : 'ms-ContextualMenu-item',
+            hrefClass : 'ms-ContextualMenu-link',
+            hrefText  : 'Employee interviews',
+            hrefUrl   : '#',
+            hrefTag   : 'employee-interviews'
+        },
+         {
+            id        : '1',
+            linkClass : 'ms-ContextualMenu-item',
+            hrefClass : 'ms-ContextualMenu-link',
+            hrefText  : 'Executive Briefings',
+            hrefUrl   : '#',
+            hrefTag   : 'executive-briefings'
+        },
+         {
+            id        : '2',
+            linkClass : 'ms-ContextualMenu-item',
+            hrefClass : 'ms-ContextualMenu-link',
+            hrefText  : 'Web Tech Talks',
+            hrefUrl   : '#',
+            hrefTag   : 'web-tech-talks'
+        }
+      ]);
+    this.set('navbaritems', items);
+    domReady(() => {
+      //activate jQuery navbar component
+      if ($.fn.NavBar) {
+          $('.ms-NavBar').NavBar();
+        }
+    });
+  },
+  onteardown: function(){
+    log('teared down');
+  }
+};
+
+</script>

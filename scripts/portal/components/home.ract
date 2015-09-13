@@ -1,0 +1,40 @@
+<!-- Home page content -->
+<div class="HomePage-content u-contentCenter">
+  <div class="HomePage-contentCell">
+    <channel-list/>
+  </div>
+</div>
+
+<script>
+var $           = window.$;
+var log         = require('bows')('Home Component');
+var domReady    = require('domready');
+var channelList = require('channel-list-component');
+var app         = require('ampersand-app');
+
+component.exports = {
+  isolated: false,
+  data: function(){
+    return {}
+  },
+  components: {
+    'channel-list': channelList
+  },
+  adapt: ['Ampersand'],
+  onrender: function(){
+    this.setupEventHandlers();
+    log('rendered');
+  },
+  onteardown: function(){
+    log('teared down');
+  },
+  setupEventHandlers: function(){
+    var channelList = this.findComponent('channel-list');
+    channelList.on('video-link', function(e){
+      e.original.preventDefault();
+      app.navigate('/player');
+      log('navigating to player');
+    });
+  }
+}
+</script>
