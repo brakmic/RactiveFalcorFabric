@@ -7,7 +7,7 @@ At <a href="http://www.advarics.net" target="_blank">advarics GmbH</a> we are cu
 
 This WebApp should serve as an example on how to combine these JavaScript libraries into a fully functional JavaScript WebApp.
 
-Our starting point was the <a href="https://github.com/OfficeDev/Office-UI-Fabric/tree/master/dist/samples/VideoPortal" target="_blank">"Video Portal" application</a> from the Office UI Fabric's GitHub pages.
+Our starting point was the <a href="https://github.com/OfficeDev/Office-UI-Fabric/tree/master/dist/samples/VideoPortal" target="_blank">"Video Portal" application</a> from Office UI Fabric's GitHub pages.
 
 We've recreated
 large parts of this app by reusing its original components & (re)combining them with additional front- & backend
@@ -66,12 +66,15 @@ npm start
 **Building**
 
 ```code
-
 gulp
 
 ```
 
-*Watch mode* with gulp watch
+or
+
+```code
+gulp watch
+```
 
 **Live Demo**
 
