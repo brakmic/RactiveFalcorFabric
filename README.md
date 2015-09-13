@@ -1,1 +1,3 @@
-***WebApp built with RactiveJS, Falcor & Office Fabric UI***
+***WebApp built with RactiveJS, Falcor & Office UI Fabric***
+
+
