@@ -82,4 +82,4 @@ gulp watch
 
 *License*
 
-MIT
+<a href="https://github.com/brakmic/RactiveFalcorFabric/blob/master/LICENSE">SEE LICENSE</a>
