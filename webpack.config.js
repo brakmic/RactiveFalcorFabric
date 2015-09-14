@@ -221,7 +221,7 @@ if (process.env.NODE_ENV === 'production') {
     config.debug   = true;
 }
 
-config.useMemoryFs = false;
+config.useMemoryFs = true;
 config.progress = true;
 
 module.exports = config;
