@@ -207,11 +207,11 @@ if (process.env.NODE_ENV === 'production') {
           join_vars     : true,  // join var declarations
           cascade       : true,  // try to cascade `right` into `left` in sequences
           side_effects  : true,  // drop side-effect-free statements
-          warnings      : false,  // warn about potentially dangerous optimizations/code
+          warnings      : true,  // warn about potentially dangerous optimizations/code
         }
       },
       logger: false,
-      //done: function(path, originalContents) { }
+      done: function(path, originalContents) { }
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true)
@@ -221,7 +221,7 @@ if (process.env.NODE_ENV === 'production') {
     config.debug   = true;
 }
 
-config.useMemoryFs = true;
+config.useMemoryFs = false;
 config.progress = true;
 
 module.exports = config;

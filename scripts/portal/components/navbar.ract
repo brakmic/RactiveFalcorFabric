@@ -81,7 +81,7 @@ component.exports = {
         }
       ]);
     this.set('navbaritems', items);
-    domReady(() => {
+    domReady(function() {
       if ($.fn.NavBar) {
           $('.ms-NavBar').NavBar();
         }
