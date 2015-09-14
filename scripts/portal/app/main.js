@@ -50,7 +50,7 @@ export default new class App {
       }
       break;
       default:{
-        log(`Cloud not load page ${name}`)
+        log(`Could not load page ${name}`)
       }
       break;
     }
